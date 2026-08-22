@@ -165,27 +165,45 @@ watchEffect(() => {
 
 // 全域快捷鍵
 const handleKeydown = (e) => {
-  const tag = e.target.tagName.toLowerCase();
-  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+  // 1. 防止長按連發
+  if (e.repeat) return;
 
-  // 避免攔截 Ctrl / Command 組合鍵（如複製貼上）
+  // 2. 防誤觸：輸入框、文字區塊、可編輯元素內不觸發
+  const tag = e.target.tagName.toLowerCase();
+  if (tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable) return;
+
+  // 3. 避免攔截系統預設快捷鍵 (Ctrl / Command)
   if (e.ctrlKey || e.metaKey) return;
 
+  // 4. 按 Escape 關閉所有彈窗
   if (e.key === 'Escape') {
     isStatsOpen.value = false;
     isSettingsOpen.value = false;
     isAmbientOpen.value = false;
-  } else if (e.code === 'Space') {
+    return;
+  }
+
+  // 5. 按 Space 開始 / 暫停 (需阻擋預設捲動)
+  if (e.code === 'Space') {
     e.preventDefault();
     handleToggle();
-  } else if (e.key === 's' || e.key === 'S' || e.code === 'KeyS') {
+    return;
+  }
+
+  // 6. 按 Alt + S 或單按 S 跳過
+  if ((e.altKey && (e.key === 's' || e.key === 'S')) || e.key === 's' || e.key === 'S') {
     e.preventDefault();
     sound.playClick();
     timer.skip();
-  } else if (e.key === 'r' || e.key === 'R' || e.code === 'KeyR') {
+    return;
+  }
+
+  // 7. 按 Alt + R 或單按 R 重置
+  if ((e.altKey && (e.key === 'r' || e.key === 'R')) || e.key === 'r' || e.key === 'R') {
     e.preventDefault();
     sound.playClick();
     timer.reset();
+    return;
   }
 };
 

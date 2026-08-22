@@ -165,6 +165,8 @@ watchEffect(() => {
 
 // 全域快捷鍵
 const handleKeydown = (e) => {
+  console.log('按下的按鍵代碼:', e.code, '按鍵字元:', e.key, '目標元素:', e.target.tagName);
+
   // 1. 防止長按連發
   if (e.repeat) return;
 

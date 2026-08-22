@@ -225,12 +225,12 @@ onUnmounted(() => {
   border-radius: var(--radius-full);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px), (hover: none) and (pointer: coarse) {
   .app-container {
     gap: 16px;
   }
-  .shortcuts-hint {
-    display: none; /* 手機觸控螢幕隱藏快捷鍵提示 */
+  .app-footer {
+    display: none !important; /* 手機與觸控螢幕完全隱藏實體鍵盤快捷鍵提示 */
   }
 }
 </style>

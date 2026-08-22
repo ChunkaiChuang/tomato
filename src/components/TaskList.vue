@@ -25,18 +25,20 @@
         autocomplete="off" 
         required 
       />
-      <div class="task-input-est">
-        <label title="預估需要花費幾個番茄鐘">預估：</label>
-        <input type="number" v-model.number="estPomos" min="1" max="20" step="1" />
-        <span class="est-icon">🍅</span>
+      <div class="task-form-controls">
+        <div class="task-input-est">
+          <label title="預估需要花費幾個番茄鐘">預估：</label>
+          <input type="number" v-model.number="estPomos" min="1" max="20" step="1" />
+          <span class="est-icon">🍅</span>
+        </div>
+        <button type="submit" class="add-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          新增
+        </button>
       </div>
-      <button type="submit" class="add-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
-        新增
-      </button>
     </form>
 
     <!-- 任務列表 -->
@@ -119,6 +121,7 @@ const handleSubmit = () => {
   border-radius: var(--radius-lg);
   padding: 24px;
   box-shadow: var(--shadow-md);
+  width: 100%;
 }
 
 .tasks-header {
@@ -126,18 +129,22 @@ const handleSubmit = () => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 18px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .tasks-title {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .tasks-title svg {
   width: 20px;
   height: 20px;
   color: var(--accent-color);
+  flex-shrink: 0;
 }
 
 .tasks-title h2 {
@@ -152,6 +159,7 @@ const handleSubmit = () => {
   padding: 2px 8px;
   border-radius: var(--radius-full);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .text-btn {
@@ -162,6 +170,7 @@ const handleSubmit = () => {
   font-size: 0.85rem;
   cursor: pointer;
   transition: var(--transition);
+  white-space: nowrap;
 }
 
 .text-btn:hover {
@@ -169,8 +178,10 @@ const handleSubmit = () => {
   text-decoration: underline;
 }
 
+/* 新增任務表單 */
 .add-task-form {
   display: flex;
+  align-items: center;
   gap: 8px;
   margin-bottom: 16px;
   background: var(--bg-input);
@@ -178,6 +189,7 @@ const handleSubmit = () => {
   border-radius: var(--radius-md);
   padding: 6px 8px;
   transition: var(--transition);
+  width: 100%;
 }
 
 .add-task-form:focus-within {
@@ -187,6 +199,7 @@ const handleSubmit = () => {
 
 .add-task-form input[type="text"] {
   flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   color: var(--text-primary);
@@ -200,6 +213,13 @@ const handleSubmit = () => {
   color: var(--text-muted);
 }
 
+.task-form-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .task-input-est {
   display: flex;
   align-items: center;
@@ -208,6 +228,11 @@ const handleSubmit = () => {
   border-left: 1px solid var(--border-color);
   color: var(--text-muted);
   font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.task-input-est label {
+  white-space: nowrap;
 }
 
 .task-input-est input[type="number"] {
@@ -241,17 +266,21 @@ const handleSubmit = () => {
   gap: 4px;
   cursor: pointer;
   transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .add-btn svg {
   width: 16px;
   height: 16px;
+  flex-shrink: 0;
 }
 
 .add-btn:hover {
   background: var(--accent-hover);
 }
 
+/* 任務清單 */
 .task-list {
   list-style: none;
   display: flex;
@@ -353,6 +382,7 @@ const handleSubmit = () => {
   display: flex;
   align-items: center;
   gap: 3px;
+  white-space: nowrap;
 }
 
 .task-action-btn {
@@ -381,5 +411,40 @@ const handleSubmit = () => {
   padding: 24px 12px;
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+/* 手機版 RWD 響應式優化 */
+@media (max-width: 480px) {
+  .tasks-section {
+    padding: 18px 14px;
+  }
+
+  .add-task-form {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .add-task-form input[type="text"] {
+    width: 100%;
+    padding: 4px 2px;
+  }
+
+  .task-form-controls {
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-color);
+    padding-top: 8px;
+  }
+
+  .task-input-est {
+    border-left: none;
+    padding: 0;
+  }
+
+  .add-btn {
+    padding: 6px 16px;
+  }
 }
 </style>

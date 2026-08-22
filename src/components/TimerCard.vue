@@ -344,28 +344,30 @@ const mainBtnLabel = computed(() => {
 
 @media (max-width: 480px) {
   .timer-card {
-    padding: 20px 16px;
+    padding: 20px 14px;
+  }
+  .mode-tabs {
+    max-width: 100%;
+  }
+  .mode-tab {
+    font-size: 0.825rem;
+    padding: 7px 8px;
   }
   .timer-display-wrap {
-    width: 270px;
-    height: 270px;
+    width: 260px;
+    height: 260px;
   }
   .progress-ring {
-    width: 270px;
-    height: 270px;
-  }
-  .progress-ring circle {
-    cx: 135;
-    cy: 135;
-    r: 120;
+    width: 260px;
+    height: 260px;
   }
   .timer-digits {
-    font-size: 3.5rem;
+    font-size: 3.25rem;
   }
   .ctrl-btn.primary {
-    padding: 12px 28px;
-    min-width: 140px;
-    font-size: 1.05rem;
+    padding: 12px 24px;
+    min-width: 130px;
+    font-size: 1rem;
   }
 }
 </style>

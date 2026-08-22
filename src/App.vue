@@ -215,11 +215,22 @@ onUnmounted(() => {
 
 .shortcuts-hint {
   display: inline-flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
   color: var(--text-muted);
   font-size: 0.8rem;
   background: rgba(0, 0, 0, 0.2);
   padding: 6px 14px;
   border-radius: var(--radius-full);
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    gap: 16px;
+  }
+  .shortcuts-hint {
+    display: none; /* 手機觸控螢幕隱藏快捷鍵提示 */
+  }
 }
 </style>

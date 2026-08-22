@@ -320,6 +320,7 @@ export function useSound() {
     ambientVol,
     setAmbient,
     updateAmbientVolume,
+    setAmbientVolume: (val) => updateAmbientVolume(val),
     playNotification: (type) => engine.playNotification(type),
     playClick: () => engine.playClick(),
     setVolume: (vol) => engine.setVolume(vol),

@@ -211,7 +211,7 @@ const handleKeydown = (e) => {
 
 onMounted(() => {
   sound.setVolume(storage.settings.soundVolume / 100);
-  sound.setAmbientVolume(storage.settings.ambientVolume / 100);
+  sound.updateAmbientVolume(storage.settings.ambientVolume);
   window.addEventListener('keydown', handleKeydown);
 });
 

@@ -45,8 +45,8 @@
       <footer class="app-footer">
         <div class="shortcuts-hint">
           <span><kbd>Space</kbd> 開始/暫停</span>
-          <span><kbd>Alt</kbd>+<kbd>S</kbd> 跳過</span>
-          <span><kbd>Alt</kbd>+<kbd>R</kbd> 重置</span>
+          <span><kbd>S</kbd> 跳過</span>
+          <span><kbd>R</kbd> 重置</span>
         </div>
       </footer>
     </div>
@@ -168,6 +168,9 @@ const handleKeydown = (e) => {
   const tag = e.target.tagName.toLowerCase();
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
 
+  // 避免攔截 Ctrl / Command 組合鍵（如複製貼上）
+  if (e.ctrlKey || e.metaKey) return;
+
   if (e.key === 'Escape') {
     isStatsOpen.value = false;
     isSettingsOpen.value = false;
@@ -175,11 +178,11 @@ const handleKeydown = (e) => {
   } else if (e.code === 'Space') {
     e.preventDefault();
     handleToggle();
-  } else if (e.altKey && (e.key === 's' || e.key === 'S' || e.code === 'KeyS')) {
+  } else if (e.key === 's' || e.key === 'S' || e.code === 'KeyS') {
     e.preventDefault();
     sound.playClick();
     timer.skip();
-  } else if (e.altKey && (e.key === 'r' || e.key === 'R' || e.code === 'KeyR')) {
+  } else if (e.key === 'r' || e.key === 'R' || e.code === 'KeyR') {
     e.preventDefault();
     sound.playClick();
     timer.reset();
